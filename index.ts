@@ -26,8 +26,9 @@ app.get("/", async (req, res) => {
 // ユーザー追加：フォームから送られてきた名前を保存する
 app.post("/users", async (req, res) => {
   const name = req.body.name;
+  const age = req.body.age ? Number(req.body.age) : null; // 文字列を数値に変えるのじゃぞ
   if (name) {
-    await prisma.user.create({ data: { name } });
+    await prisma.user.create({ data: { name, age } });
   }
   res.redirect("/");
 });
